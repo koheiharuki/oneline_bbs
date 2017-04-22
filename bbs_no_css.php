@@ -1,5 +1,5 @@
 <?php
-//aaaaaaaaaaaaa
+//aaaaaaaaaaaaaoioioi
 	//データベースへ接続し、SQLを実行し、切断する部分を記述しましょう
 
 	// データベースに接続
