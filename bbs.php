@@ -1,4 +1,5 @@
 <?php
+//fakjdfklajfkj
 	//データベースへ接続し、SQLを実行し、切断する部分を記述しましょう
 
 	// データベースに接続
@@ -47,6 +48,8 @@
 			$post_datas[] = $rec;
 		}
 	}
+
+
 
 
 	// データベースから切断
@@ -128,12 +131,18 @@
                       <i class="fa fa-cogs"></i>
                   </div>
                   <div class="timeline-label">
-                      <h2><a href="#">seedくん</a> <span>2016-01-20</span></h2>
+                      <h2><a href="#"></a> <span></span></h2>
                       <p>つぶやいたコメント</p>
+                      <?php
+                      foreach ($post_datas as $post_each) {
+                        echo $post_each['nickname'].'<br>';
+                        echo $post_each['comment'].'<br>';
+                        echo $post_each['created'].'<br>';
+                        echo '<hr>';}
+                        ?>
                   </div>
               </div>
           </article>
-
           <article class="timeline-entry begin">
               <div class="timeline-entry-inner">
                   <div class="timeline-icon" style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);">
