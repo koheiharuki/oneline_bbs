@@ -10,7 +10,7 @@
 	$dbh->query('SET NAMES utf8');
 
 	//配列で取得したデータを格納
-	//配列を初期化
+	//配列を初期化わからない？？？？？？？？
 	$post_datas = array();
 
 	// POST送信されたらINSERT文を実行
@@ -26,16 +26,13 @@
 		// INSERT文実行
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
+     }
+		//SQL文作成（SELECT文） 最新順（降順）で表示
+		$sql = 'SELECT * FROM `posts` ORDER BY `created` DESC;';
 
 		//SELECT文の実行
-		//SQL文作成（SELECT文）
-		$sql = 'SELECT * FROM `posts`;';
-
-		//実行
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
-
-
 
 		// 繰り返し文でデータの取得（フェッチ）
 		while (1) {
@@ -46,14 +43,12 @@
 			//echo $rec['nickname'];
 			$post_datas[] = $rec;
 		}
-	}
-
 
 
 
 	// データベースから切断
 	$dbh = null;
-?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -123,9 +118,9 @@
       <!-- 画面右側 -->
       <div class="col-md-8 content-margin-top">
         <div class="timeline-centered">
+					<?php
+										foreach ($post_datas as $post_each) {?>
           <article class="timeline-entry">
-            <?php if (!empty($_POST)) {
-                      foreach ($post_datas as $post_each) {?>
               <div class="timeline-entry-inner">
                   <div class="timeline-icon bg-success">
                       <i class="entypo-feather"></i>
@@ -133,12 +128,24 @@
                   </div>
                   <div class="timeline-label">
                       <h2><a href="#"><?php echo $post_each['nickname'] . '<br>'; ?></a> <span><?php echo $post_each['comment'] . '<br>'; ?></span></h2>
-                      <p><?php echo $post_each['created'] . '<br>'; ?></p>
+											<?php
+										   //一旦日時型に変換（string型からdatetime型へ変換）
+											 $created = strtotime ($post_each['created']);
+
+											 //書式を変換
+											 $created = date('Y-m-d', $created);
+
+											// <p><?php echo $post_each['created'] . '<br>'';?></p>
+
+											<?php ?>
+
+											<p><?php echo $created; ?></p>
 
                   </div>
               </div>
-              <?php }} ?>
+
           </article>
+					  <?php } ?>
           <article class="timeline-entry begin">
               <div class="timeline-entry-inner">
                   <div class="timeline-icon" style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);">
