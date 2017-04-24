@@ -1,11 +1,19 @@
 <?php
-//fakjdfklajfkj
-	//データベースへ接続し、SQLを実行し、切断する部分を記述しましょう
 
-	// データベースに接続
-	$dns = 'mysql:dbname=oneline_bbs;host=localhost';
-	$user = 'root';
-	$password = '';
+	// データベースに接続local
+	// $dns = 'mysql:dbname=oneline_bbs;host=localhost';
+	// $user = 'root';
+	// $password = '';
+
+	// データベースに接続remote
+	// dbnameをロリポップのデータベース名に、hostをロリポップのサーバーに変更
+	$dsn = 'mysql:dbname=LAA0854002-onelinebbs;host=mysql108.phy.lolipop.lan
+// ';
+// userをロリポップのユーザー名に変更
+	$user = 'LAA0854002';
+// 	passwordをロリポップのパスワードに変更
+	$password = 'khkh3374';
+
 	$dbh = new PDO($dns,$user,$password);
 	$dbh->query('SET NAMES utf8');
 
