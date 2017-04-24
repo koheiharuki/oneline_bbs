@@ -7,8 +7,7 @@
 
 	// データベースに接続remote
 	// dbnameをロリポップのデータベース名に、hostをロリポップのサーバーに変更
-	$dsn = 'mysql:dbname=LAA0854002-onelinebbs;host=mysql108.phy.lolipop.lan
-// ';
+	$dsn = 'mysql:dbname=LAA0854002-onelinebbs;host=mysql108.phy.lolipop.lan';
 // userをロリポップのユーザー名に変更
 	$user = 'LAA0854002';
 // 	passwordをロリポップのパスワードに変更
