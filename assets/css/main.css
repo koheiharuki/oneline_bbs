@@ -1,5 +1,7 @@
 body {
   margin-top: 20px;
+  background-color: red;
+  background-image: url(“win2017.png”);
 }
 
 .content-margin-top {
