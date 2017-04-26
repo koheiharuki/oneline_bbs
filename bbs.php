@@ -1,68 +1,53 @@
 <?php
-
-	// データベースに接続local
-	$dns = 'mysql:dbname=oneline_bbs;host=localhost';
-	$user = 'root';
-	$password = '';
-
-	// データベースに接続remote
-	// dbnameをロリポップのデータベース名に、hostをロリポップのサーバーに変更
-	// $dsn = 'mysql:dbname=LAA0854002-onelinebbs;host=mysql108.phy.lolipop.lan';
-// userをロリポップのユーザー名に変更
-	// $user = 'LAA0854002';
-// 	passwordをロリポップのパスワードに変更
-	// $password = 'khkh3374';
-
-	$dbh = new PDO($dns,$user,$password);
-	$dbh->query('SET NAMES utf8');
-
-	//配列で取得したデータを格納
-	//配列を初期化わからない？？？？？？？？
+// 	// データベースに接続local
+// 	// $dns = 'mysql:dbname=oneline_bbs;host=localhost';
+// 	// $user = 'root';
+// 	// $password = '';
+// 	// データベースに接続remote
+// 	// dbnameをロリポップのデータベース名に、hostをロリポップのサーバーに変更
+$dsn = 'mysql:dbname=LAA0854002-onelinebbs;host=mysql108.phy.lolipop.lan';
+ // userをロリポップのユーザー名に変更
+$user = 'LAA0854002';
+ // 	passwordをロリポップのパスワードに変更
+$password = 'khkh3374';
+$dbh = new PDO($dsn,$user,$password);
+$dbh->query('SET NAMES utf8');
+// 	//配列で取得したデータを格納
+// 	//配列を初期化わからない？？？？？？？？
 	$post_datas = array();
-
-	// POST送信されたらINSERT文を実行
-	if (!empty($_POST)){
-		$nickname = $_POST['nickname'];
-		$comment = $_POST['comment'];
-
-		//SQL文作成
-		$sql = 'INSERT INTO `posts` ( `nickname`, `comment`, `created`) VALUES ("'.$nickname.'","'.$comment.'",now());';
-
-		// var_dump($sql);
-
-		// INSERT文実行
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
-     }
-		//SQL文作成（SELECT文） 最新順（降順）で表示
-		$sql = 'SELECT * FROM `posts` ORDER BY `created` DESC;';
-
-		//SELECT文の実行
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
-
-		// 繰り返し文でデータの取得（フェッチ）
-		while (1) {
-			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-			if ($rec == false){
-				break;
-			}
-			//echo $rec['nickname'];
-			$post_datas[] = $rec;
-		}
-
-
-
-	// データベースから切断
-	$dbh = null;
-  ?>
-
+// 	// POST送信されたらINSERT文を実行
+if (!empty($_POST)){
+	$nickname = $_POST['nickname'];
+	$comment = $_POST['comment'];
+// 		//SQL文作成
+$sql = 'INSERT INTO `posts` ( `nickname`, `comment`, `created`) VALUES ("'.$nickname.'","'.$comment.'",now());';
+// 		// var_dump($sql);
+// 		// INSERT文実行
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+}
+// 		//SQL文作成（SELECT文） 最新順（降順）で表示
+$sql = 'SELECT * FROM `posts` ORDER BY `created` DESC;';
+// 		//SELECT文の実行
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+// 		// 繰り返し文でデータの取得（フェッチ）
+while (1) {
+	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+	if ($rec == false){
+		break;
+	}
+	echo $rec['nickname'];
+	$post_datas[] = $rec;
+}
+// データベースから切断
+$dbh = null;
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>ウイニングイレブン掲示板</title>
-
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
@@ -76,7 +61,7 @@
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
@@ -123,20 +108,18 @@
           <button type="submit" class="btn btn-primary col-xs-12" disabled　>投稿する</button>
         </form>
 				<br><br><br><br>
-				<div class="glyphicon glyphicon-circle-arrow-down">公式サイト集
-
-				</div>
-				<a href="https://www.konami.com/wepes/2017/jp/ja/"><img src="" alt="">
-	<img src="assets/img/win2017.png" alt="win2017.png" width="360" height"60"></a>
+				<div class="glyphicon glyphicon-circle-arrow-down" style="margin-bottom: 10px;">公式サイト集</div><br>
+				<a href="https://www.konami.com/wepes/2017/jp/ja/">
+	<img src="assets/img/win2017.jpg" alt="win2017.png" width="360" height"60"></a>
 
 	<br><br>
 
-	<a href="http://www.konami.jp/we/2016/index.php5"><img src="" alt="">
-<img src="assets/img/win2016.png" alt="win2016.png" width="360" height"60"></a>
+	<a href="http://www.konami.jp/we/2016/index.php5">
+<img src="assets/img/win2016.jpg" alt="win2016.png" width="360" height"60"></a>
 
 <br><br>
 
-<a href="http://www.konami.jp/we/2015/"><img src="" alt="">
+<a href="http://www.konami.jp/we/2015/">
 <img src="assets/img/win2015.jpg" alt="win2015.png" width="360" height"60"></a>
 
 
